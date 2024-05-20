@@ -50,6 +50,7 @@ gem 'bootsnap', require: false
 gem 'slim-rails'
 gem 'html2slim-ruby3'
 gem 'bootstrap'
+gem 'importmap-rails'
 
 # Use Sass to process CSS
 # gem "sassc-rails"
