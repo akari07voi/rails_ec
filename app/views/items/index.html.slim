@@ -12,7 +12,7 @@
           - @items.each do |item|
               .col.mb-5
                 .card.h-100
-                  img.card-img-top[src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..."]
+                  = image_tag item.image, class: 'card-img-top' if item.image.attached?
                   .card-body.p-4
                     .text-center
                       h5.fw-bolder
