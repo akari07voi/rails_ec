@@ -32,6 +32,20 @@
 #   image: ActiveStorage::Blob.create_and_upload!(io: File.open('app/assets/images/fashion_skirt4_purple.png'), filename: 'skirt_image.png')
 # )
 
-Item.where('id=1').update(image: ActiveStorage::Blob.create_and_upload!(io: File.open('app/assets/images/fashion_tshirt5_blue.png'), filename: 'tshirt_image.png'))
-Item.where('id=2').update(image: ActiveStorage::Blob.create_and_upload!(io: File.open('app/assets/images/parka6_pink.png'), filename: 'parka_image.png'))
-Item.where('id=3').update(image: ActiveStorage::Blob.create_and_upload!(io: File.open('app/assets/images/kids_kutsushita_girl.png'), filename: 'socks_image.png'))
+# Item.where('id=1').update(image: ActiveStorage::Blob.create_and_upload!(io: File.open('app/assets/images/fashion_tshirt5_blue.png'), filename: 'tshirt_image.png'))
+# Item.where('id=2').update(image: ActiveStorage::Blob.create_and_upload!(io: File.open('app/assets/images/parka6_pink.png'), filename: 'parka_image.png'))
+# Item.where('id=3').update(image: ActiveStorage::Blob.create_and_upload!(io: File.open('app/assets/images/kids_kutsushita_girl.png'), filename: 'socks_image.png'))
+
+ Item.create(
+   name: '黒色のTシャツ',
+   description: '黒無地の通気性の良いTシャツです。',
+   price: 1500,
+   image: ActiveStorage::Blob.create_and_upload!(io: File.open('app/assets/images/fashion_tshirt2_black.png'), filename: 'black_tshirt_image.png')
+ )
+
+ Item.create(
+   name: '黄色いキャップ',
+   description: '小学生向けの黄色いキャップです。',
+   price: 3500,
+   image: ActiveStorage::Blob.create_and_upload!(io: File.open('app/assets/images/fashion_tsuugakubou_cap.png'), filename: 'yellow_cap_image.png')
+ )
