@@ -20,5 +20,5 @@
                       = "#{item.price}円"
                   .card-footer.p-4.pt-0.border-top-0.bg-transparent
                     .text-center
-                      a.btn.btn-outline-dark.mt-auto[href="#"]
-                        | 詳細
+                      = link_to '詳細', item_path(item), class: 'btn btn-outline-dark mt-auto'
+                    
