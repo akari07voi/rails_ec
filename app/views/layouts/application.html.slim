@@ -21,15 +21,15 @@ html[lang="ja"]
   body
     nav.navbar.navbar-expand-lg.navbar-light.bg-light
       .container.px-4.px-lg-5
-        a.navbar-brand[href="#"]
-          | 私の通販サイト
+        = link_to '私の通販サイト', root_path, class: 'navbar-brand'
         button.navbar-toggler[type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"]
           span.navbar-toggler-icon
         #navbarSupportedContent.collapse.navbar-collapse
           ul.navbar-nav.me-auto.mb-2.mb-lg-0.ms-lg-4
 
             li.nav-item
-              a.nav-link.active[aria-current="page" href="#"]
+              = link_to 'ホーム', root_path, class: 'nav-link active', 'aria-current': 'page'
+              /a.nav-link.active[aria-current="page" href="#"]
                 | ホーム
             li.nav-item
               a.nav-link[href="#"]
@@ -40,6 +40,7 @@ html[lang="ja"]
               ul.dropdown-menu[aria-labelledby="navbarDropdown"]
 
                 li
+
                   a.dropdown-item[href="#"]
                     | 全商品
                 li
