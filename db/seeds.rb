@@ -7,34 +7,33 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-# Item.create(
-#   name: 'Tシャツ',
-#   description: '白い無地のTシャツです。',
-#   price: 1000
-# )
+ Item.create(
+   name: 'Tシャツ',
+   description: '白い無地のTシャツです。',
+   price: 1000,
+   image: ActiveStorage::Blob.create_and_upload!(io: File.open('app/assets/images/fashion_tshirt5_blue.png'), filename: 'tshirt_image.png')
+ )
 
-# Item.create(
-#   name: 'パーカー',
-#   description: '白い無地のパーカーです。',
-#   price: 1500
-# )
+ Item.create(
+   name: 'パーカー',
+   description: '白い無地のパーカーです。',
+   price: 1500,
+   image: ActiveStorage::Blob.create_and_upload!(io: File.open('app/assets/images/parka6_pink.png'), filename: 'parka_image.png')
+ )
 
-# Item.create(
-#   name: 'ソックス',
-#   description: '黒い無地のソックスです。',
-#   price: 500
-# )
+ Item.create(
+   name: 'ソックス',
+   description: '黒い無地のソックスです。',
+   price: 500,
+   image: ActiveStorage::Blob.create_and_upload!(io: File.open('app/assets/images/kids_kutsushita_girl.png'), filename: 'socks_image.png')
+ )
 
-# Item.create(
-#   name: '紫色のスカート',
-#   description: '紫無地のスカートです。',
-#   price: 2500,
-#   image: ActiveStorage::Blob.create_and_upload!(io: File.open('app/assets/images/fashion_skirt4_purple.png'), filename: 'skirt_image.png')
-# )
-
-# Item.where('id=1').update(image: ActiveStorage::Blob.create_and_upload!(io: File.open('app/assets/images/fashion_tshirt5_blue.png'), filename: 'tshirt_image.png'))
-# Item.where('id=2').update(image: ActiveStorage::Blob.create_and_upload!(io: File.open('app/assets/images/parka6_pink.png'), filename: 'parka_image.png'))
-# Item.where('id=3').update(image: ActiveStorage::Blob.create_and_upload!(io: File.open('app/assets/images/kids_kutsushita_girl.png'), filename: 'socks_image.png'))
+ Item.create(
+   name: '紫色のスカート',
+   description: '紫無地のスカートです。',
+   price: 2500,
+   image: ActiveStorage::Blob.create_and_upload!(io: File.open('app/assets/images/fashion_skirt4_purple.png'), filename: 'skirt_image.png')
+ )
 
  Item.create(
    name: '黒色のTシャツ',
@@ -49,3 +48,8 @@
    price: 3500,
    image: ActiveStorage::Blob.create_and_upload!(io: File.open('app/assets/images/fashion_tsuugakubou_cap.png'), filename: 'yellow_cap_image.png')
  )
+
+ #初期データは画像を含めていなかったためアップデート用に以下を使用した
+# Item.where('id=1').update(image: ActiveStorage::Blob.create_and_upload!(io: File.open('app/assets/images/fashion_tshirt5_blue.png'), filename: 'tshirt_image.png'))
+# Item.where('id=2').update(image: ActiveStorage::Blob.create_and_upload!(io: File.open('app/assets/images/parka6_pink.png'), filename: 'parka_image.png'))
+# Item.where('id=3').update(image: ActiveStorage::Blob.create_and_upload!(io: File.open('app/assets/images/kids_kutsushita_girl.png'), filename: 'socks_image.png'))
