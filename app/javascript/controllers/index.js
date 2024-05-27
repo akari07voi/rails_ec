@@ -6,8 +6,6 @@ import { application } from "./application"
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
-const express = require('express')
-const path = require('path')
 
 const PORT = process.env.PORT || 3000
 
