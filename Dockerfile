@@ -35,4 +35,4 @@ ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3000
 
 # Start the main process.
-CMD ["rails", "server", "-b", "0.0.0.0"]
+CMD bash -c "rm -f tmp/pids/server.pid && bundle exec puma -C config/puma.rb"
