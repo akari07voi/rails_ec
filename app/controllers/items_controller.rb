@@ -7,6 +7,6 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.with_attached_image.find(params[:id])
-    @items = Item.with_attached_image.limit(4).where.not(id: params[:id])
+    @items = Item.with_attached_image.limit(4).where.not(id: params[:id]).order(created_at: :desc)
   end
 end
