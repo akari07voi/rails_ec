@@ -1,4 +1,7 @@
 class Admin::ItemsController < ApplicationController
+  helper_method :current_user
+  before_action :login_required
+
   def index
     @items = Item.with_attached_image.order(:id)
   end
@@ -33,5 +36,13 @@ class Admin::ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:name, :price, :description, :image)
+  end
+
+  def current_user
+    @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+  end
+
+  def login_required
+    redirect_to admin_login_path unless current_user
   end
 end

@@ -1,0 +1,13 @@
+.container
+  .col-p-4
+
+  h1 ログイン
+
+  = form_with scope: :session, local: true do |f|
+    .form-group
+      = f.label :name, 'ユーザー名'
+      = f.text_field :name, class: 'form-control', id: 'user_name'
+    .form-group
+      = f.label :password, 'パスワード'
+      = f.text_field :password, class: 'form-control', id: 'user_password'
+    = f.submit 'ログイン', class: 'btn btn-dark'
