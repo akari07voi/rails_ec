@@ -24,7 +24,7 @@ class Admin::ItemsController < ApplicationController
   end
 
   def destroy
-    item = Item.find(:id)
+    item = Item.find(params[:id])
     item.destroy
     redirect_to admin_items_url, notice: "商品名「#{item.name}」を削除しました"
   end
