@@ -10,7 +10,7 @@ class Admin::ItemsController < ApplicationController
   def create
     item = Item.new(item_params)
     item.save!
-    redirect_to items_url, notice: "商品名「#{item.name}」を登録しました"
+    redirect_to admin_items_url(@item), notice: "商品名「#{item.name}」を登録しました"
   end
 
   def edit
@@ -20,7 +20,7 @@ class Admin::ItemsController < ApplicationController
   def update
     item = Item.find(params[:id])
     item.update!(item_params)
-    redirect_to items_url, notice: "商品名「#{item.name}」を更新しました"
+    redirect_to admin_items_url, notice: "商品名「#{item.name}」を更新しました"
   end
 
   def destroy
@@ -31,7 +31,7 @@ class Admin::ItemsController < ApplicationController
 
   private
 
-  def items_params
-    params.riquire(:item).permit(:name, :price, :description, :image)
+  def item_params
+    params.require(:item).permit(:name, :price, :description, :image)
   end
 end

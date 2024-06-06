@@ -1,18 +1,18 @@
-.container
-  h1 商品一覧ページ
-
-  = link_to '商品作成', new_admin_item_path, class: 'btn btn-outline-dark mt-auto'
-
-  - @items.each do |item|
-      .col.mb-5
-        .card.h-100
-          = image_tag item.image, class: 'card-img-top' if item.image.attached?
-          .card-body.p-4
-            .text-center
-              h5.fw-bolder
-                = item.name 
-              = "#{item.price}円"
-          .card-footer.p-4.pt-0.border-top-0.bg-transparent
-            .text-center
-              = link_to '編集', edit_admin_item_path(item), class: 'btn btn-outline-dark mt-auto'
-              = link_to '削除', [:admin, item], data: { turbo_method: :delete, status: :see_other, turbo_confirm: "削除してもよろしいですか？"}, class: 'btn btn-danger'
+section.py-5
+  .container.px-4.px-lg-5.mt-5
+    h1 商品一覧ページ
+    = link_to '商品作成', new_admin_item_path, class: 'btn btn-outline-dark mt-auto'
+    .row
+      - @items.each do |item|
+          .col-4.mb-5
+            .card.h-100
+              = image_tag item.image, class: 'card-img-top' if item.image.attached?
+              .card-body.p-4
+                .text-center
+                  h5.fw-bolder
+                    = item.name 
+                  = "#{item.price}円"
+              .card-footer.p-4.pt-0.border-top-0.bg-transparent
+                .text-center
+                  = link_to '編集', edit_admin_item_path(item), class: 'btn btn-outline-dark mt-auto'
+                  = link_to '削除', [:admin, item], data: { turbo_method: :delete, status: :see_other, turbo_confirm: "削除してもよろしいですか？"}, class: 'btn btn-danger'

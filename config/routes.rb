@@ -3,10 +3,6 @@
 Rails.application.routes.draw do
   namespace :admin do
     resources :items
-    # get 'items/index'
-    # get 'items/new'
-    # get 'items/edit'
-    delete 'items/:id', to: 'items#destroy'
   end
   root to: 'items#index'
 
