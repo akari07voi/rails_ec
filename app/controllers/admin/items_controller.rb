@@ -11,10 +11,14 @@ class Admin::ItemsController < ApplicationController
   end
 
   def create
-    item = Item.new(item_params)
-    item.save!
-    flash[:notice] = "商品名「#{item.name}」を登録しました。"
-    redirect_to admin_items_url(@item)
+    @item = Item.new(item_params)
+
+    if @item.save
+      flash[:notice] = "商品名「#{@item.name}」を登録しました。"
+      redirect_to admin_items_url
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def edit
@@ -22,10 +26,13 @@ class Admin::ItemsController < ApplicationController
   end
 
   def update
-    item = Item.find(params[:id])
-    item.update!(item_params)
-    flash[:notice] = "商品名「#{item.name}」を更新しました。"
-    redirect_to admin_items_url
+    @item = Item.find(params[:id])
+    if @item.update(item_params)
+      flash[:notice] = "商品名「#{@item.name}」を更新しました。"
+      redirect_to admin_items_url
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy

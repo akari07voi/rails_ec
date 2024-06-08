@@ -1,3 +1,9 @@
+container.px-4.px-lg-5.mx-5
+  - if @item.errors.present?
+    ul#error_explanation
+      - @item.errors.full_messages.each do |message|
+        li= message
+
 = form_with model: item, local: true do |f|
   .form-group
     = f.label :name
