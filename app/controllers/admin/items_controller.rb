@@ -13,7 +13,8 @@ class Admin::ItemsController < ApplicationController
   def create
     item = Item.new(item_params)
     item.save!
-    redirect_to admin_items_url(@item), notice: "商品名「#{item.name}」を登録しました"
+    flash[:notice] = "商品名「#{item.name}」を登録しました。"
+    redirect_to admin_items_url(@item)
   end
 
   def edit
@@ -23,13 +24,15 @@ class Admin::ItemsController < ApplicationController
   def update
     item = Item.find(params[:id])
     item.update!(item_params)
-    redirect_to admin_items_url, notice: "商品名「#{item.name}」を更新しました"
+    flash[:notice] = "商品名「#{item.name}」を更新しました。"
+    redirect_to admin_items_url
   end
 
   def destroy
     item = Item.find(params[:id])
     item.destroy
-    redirect_to admin_items_url, notice: "商品名「#{item.name}」を削除しました"
+    flash[:notice] = "商品名「#{item.name}」を削除しました。"
+    redirect_to admin_items_url
   end
 
   private

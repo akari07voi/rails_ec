@@ -58,6 +58,9 @@ html[lang="ja"]
               |  カート 
               span.badge.bg-dark.text-white.ms-1.rounded-pill
                 | 0
+    container.px-4.px-lg-5.mx-5
+      - if flash.notice.present? 
+        .alert.alert-success.mx-5 = flash.notice
     = yield
     footer.py-5.bg-dark
       .container
