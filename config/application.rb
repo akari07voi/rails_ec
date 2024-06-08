@@ -30,5 +30,6 @@ module Myapp
     end
     config.action_view.default_form_builder = 'ApplicationFormBuilder'
     config.i18n.default_locale = :ja
+    config.assets.initialize_on_precompile = false
   end
 end
