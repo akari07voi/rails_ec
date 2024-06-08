@@ -1,6 +1,6 @@
 section
   .container.px-4.px-lg-5.mt-5
-    h1 商品一覧ページ
+    h1 管理ページ 商品一覧
     = link_to '商品作成', new_admin_item_path, class: 'btn btn-outline-dark mt-auto'
     - if current_user 
       = link_to 'ログアウト', admin_logout_path, data: {turbo_method: :delete, status: :see_other, turbo_confirm: "ログアウトしてもよろしいですか？"} , class: 'btn btn-outline-dark mt-auto'
