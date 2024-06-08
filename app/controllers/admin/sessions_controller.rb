@@ -1,27 +1,31 @@
-class Admin::SessionsController < ApplicationController
-  def new; end
+# frozen_string_literal: true
 
-  def create
-    user = User.find_by(name: session_params[:name])
-    if user&.authenticate(session_params[:password])
-      session[:user_id] = user.id
-      flash[:notice] = 'ログインしました。'
-      redirect_to admin_items_url
-    else
-      render :new
+module Admin
+  class SessionsController < ApplicationController
+    def new; end
+
+    def create
+      user = User.find_by(name: session_params[:name])
+      if user&.authenticate(session_params[:password])
+        session[:user_id] = user.id
+        flash[:notice] = 'ログインしました。'
+        redirect_to admin_items_url
+      else
+        render :new
+      end
     end
-  end
 
-  def destroy
-    reset_session
+    def destroy
+      reset_session
 
-    flash[:notice] = 'ログアウトしました。'
-    redirect_to admin_login_path
-  end
+      flash[:notice] = 'ログアウトしました。'
+      redirect_to admin_login_path
+    end
 
-  private
+    private
 
-  def session_params
-    params.require(:session).permit(:name, :password)
+    def session_params
+      params.require(:session).permit(:name, :password)
+    end
   end
 end
