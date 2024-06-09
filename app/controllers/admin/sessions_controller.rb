@@ -18,8 +18,7 @@ module Admin
     def destroy
       reset_session
 
-      flash[:notice] = 'ログアウトしました。'
-      redirect_to admin_login_path
+      redirect_to admin_login_path, notice: 'ログアウトしました。'
     end
 
     private
