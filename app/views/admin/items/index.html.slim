@@ -2,10 +2,6 @@ section
   .container.px-4.px-lg-5.mt-5
     h1 管理ページ 商品一覧
     = link_to '商品作成', new_admin_item_path, class: 'btn btn-outline-dark mt-auto'
-    - if current_user 
-      = button_to 'ログアウト', admin_logout_path(session) , { method: :delete , class: 'btn btn-outline-dark mt-auto'}
-    - else 
-      = link_to 'ログイン', admin_login_path(session), class: 'btn btn-outline-dark mt-auto'
 
     .row
       - @items.each do |item|

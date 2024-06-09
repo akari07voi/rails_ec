@@ -2,8 +2,7 @@
 
 module Admin
   class ItemsController < ApplicationController
-    helper_method :current_user
-    before_action :login_required
+    before_action :basic_auth
 
     def index
       @items = Item.with_attached_image.order(:id)
@@ -51,12 +50,10 @@ module Admin
       params.require(:item).permit(:name, :price, :description, :image)
     end
 
-    def current_user
-      @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
-    end
-
-    def login_required
-      redirect_to admin_login_path unless current_user
+    def basic_auth
+      authenticate_or_request_with_http_basic do |name, password|
+        name == ENV['BASIC_AUTH_USER'] && password == ENV['BASIC_AUTH_PASSWORD']
+      end
     end
   end
 end
