@@ -15,7 +15,6 @@ html[lang="ja"]
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
-    = javascript_importmap_tags
     = javascript_tag 'application'
 
   body
@@ -58,6 +57,9 @@ html[lang="ja"]
               |  カート 
               span.badge.bg-dark.text-white.ms-1.rounded-pill
                 | 0
+    container.px-4.px-lg-5.mx-5
+      - if flash.notice.present? 
+        .alert.alert-success.mx-5 = flash.notice
     = yield
     footer.py-5.bg-dark
       .container
