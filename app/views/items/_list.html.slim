@@ -10,3 +10,4 @@
         .card-footer.p-4.pt-0.border-top-0.bg-transparent
           .text-center
             = link_to '詳細', item_path(item), class: 'btn btn-outline-dark mt-auto'
+            = button_to 'カート追加', { controller: 'carts', action: 'create' }, { method: :post, params: { item_id: item.id }, class: 'btn btn-outline-dark mt-auto' }

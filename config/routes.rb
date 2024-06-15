@@ -3,12 +3,12 @@
 Rails.application.routes.draw do
   namespace :admin do
     resources :items
-    get '/login', to: 'sessions#new'
-    post '/login', to: 'sessions#create'
-    delete '/logout', to: 'sessions#destroy'
   end
   root to: 'items#index'
 
+  get '/carts', to: 'carts#index'
+  post '/carts', to: 'carts#create'
+  delete '/carts', to: 'carts#destroy'
   resources :items
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
