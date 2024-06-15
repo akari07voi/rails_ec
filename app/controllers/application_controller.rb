@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  before_action :current_cart
+  helper_method :current_cart
+
+  private
 
   def current_cart
     session[:cart] = Cart.where(session_id: session[:session_id])
