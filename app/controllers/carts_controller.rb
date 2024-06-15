@@ -21,17 +21,16 @@ class CartsController < ApplicationController
     add_cart = []
     add_count = params[:count] ? params[:count].to_i : 1
     (1..add_count).each do
-      add_item_param = { item_id: params[:item_id], session_id: session[:session_id] }
+      add_item_param = Cart.new(item_id: params[:item_id], session_id: session[:session_id])
       add_cart << add_item_param
     end
-    Cart.insert_all(add_cart)
+    Cart.import add_cart
     redirect_to root_path
   end
 
   def destroy
     cart = Cart.where(item_id: params[:item_id], session_id: session[:session_id])
     cart.destroy_all
-    # binding.pry
     redirect_to carts_path
   end
 end
