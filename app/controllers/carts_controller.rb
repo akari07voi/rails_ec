@@ -28,8 +28,8 @@ class CartsController < ApplicationController
   end
 
   def destroy
-    cart = Cart.where(session[:cart])
-    cart.destroy_all
+    destroy_item = CartItem.where(cart_id: session[:cart], item_id: params[:item_id])
+    destroy_item.destroy_all
     redirect_to carts_path
   end
 end
