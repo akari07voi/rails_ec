@@ -6,7 +6,14 @@ class ApplicationController < ActionController::Base
   private
 
   def current_cart
-    session[:cart] = Cart.where(session_id: session[:session_id])
-    @cart = session[:cart]
+    if session[:cart]
+      session[:cart] = Cart.find_by(id: session[:cart]).id
+      @cart_item = CartItem.where(cart_id: session[:cart])
+    else
+      session[:cart] = []
+      cart = Cart.new(session_id: session.id)
+      cart.save
+      session[:cart] = cart.id
+    end
   end
 end
