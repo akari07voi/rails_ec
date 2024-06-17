@@ -24,7 +24,7 @@ class CartsController < ApplicationController
   end
 
   def destroy
-    destroy_item = @cart_item.where(item_id: params[:item_id])
+    destroy_item = @cart_items.where(item_id: params[:item_id])
     destroy_item.destroy_all
     redirect_to carts_path
   end
