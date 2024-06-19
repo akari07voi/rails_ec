@@ -18,10 +18,11 @@
             p.lead
               = @item.description
             .d-flex
-              input#inputQuantity.form-control.text-center.me-3[type="num" value="1" style="max-width: 3rem"]
-              button.btn.btn-outline-dark.flex-shrink-0[type="button"]
-                i.bi-cart-fill.me-1
-                | カートに追加 
+              = form_with url: { controller: 'carts', action: 'create' } do |f| 
+                = f.number_field :count, { min: 1, class: 'form-control text-center me-3 num-field-3rem' }
+                = f.button :submit, name: 'item_id', value: @item.id , class: 'btn btn-outline-dark flex-shrink-0' do
+                  i.bi-cart-fill.me-1
+                  | カートに追加 
     section.py-5.bg-light
       .container.px-4.px-lg-5.mt-5
         h2.fw-bolder.mb-4

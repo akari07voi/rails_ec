@@ -52,11 +52,11 @@ html[lang="ja"]
                     | 新商品
           form.d-flex
 
-            button.btn.btn-outline-dark[type="submit"]
+            = link_to carts_path, { method: :get, class: 'btn btn-outline-dark' } do
               i.bi-cart-fill.me-1
-              |  カート 
+              | カート
               span.badge.bg-dark.text-white.ms-1.rounded-pill
-                | 0
+                = @cart_items.nil? ? 0 : @cart_items.count
     container.px-4.px-lg-5.mx-5
       - if flash.notice.present? 
         .alert.alert-success.mx-5 = flash.notice

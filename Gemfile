@@ -47,6 +47,7 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
 
+gem 'activerecord-import'
 gem 'aws-sdk-s3', require: false
 gem 'bootstrap'
 gem 'html2slim-ruby3'
@@ -69,6 +70,7 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'htmlbeautifier'
+  gem 'pry-byebug'
   gem 'rails_best_practices'
   gem 'rubocop', require: false
   gem 'rubocop-hc', require: false, github: 'ihatov08/rubocop-hc'
