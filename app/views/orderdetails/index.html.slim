@@ -1,0 +1,7 @@
+- @orders.each do |order|
+    .col.mb-5
+      .card.h-100
+        .card-body.p-4
+          h5.fw-bolder
+            = "注文者：#{order.user.firstname} さま" 
+            = link_to '詳細', orderdetail_path(order), method: :get, class: 'btn btn-outline-dark mt-auto'

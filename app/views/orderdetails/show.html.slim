@@ -1,0 +1,12 @@
+section.py-5
+  .container.px-2.px-lg-5
+    h1 購入明細
+    .row.gx-4
+        = "購入者：#{@order.user.firstname} #{@order.user.lastname} さま"
+        = "注文個数：#{@order.order_details.size}個"
+        - @order.order_details.each do |order_detail|
+          .fs-5.mb-5
+            span
+              = "#{order_detail.name} #{order_detail.price}円"
+          p.lead
+            = order_detail.description
