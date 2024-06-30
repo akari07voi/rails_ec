@@ -20,6 +20,6 @@ section.py-5
             td
               = "#{order.user.firstname} #{order.user.lastname}"
             td
-              = order.user.created_at
+              = order.user.created_at.in_time_zone('Tokyo')
             td
               = link_to '詳細', orderdetail_path(order), class: 'btn btn-outline-dark mt-auto'
