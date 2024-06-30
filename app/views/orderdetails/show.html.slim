@@ -1,12 +1,76 @@
 section.py-5
   .container.px-2.px-lg-5
     h1 購入明細
-    .row.gx-4
-        = "購入者：#{@order.user.firstname} #{@order.user.lastname} さま"
-        = "注文個数：#{@order.order_details.size}個"
+
+    h2 購入者情報
+
+    table.table
+      thead
+        tr
+          th[scope="col"]
+            | 項目
+          th[scope="col"]
+            | 登録情報
+      tbody
+        tr
+          td
+            | 氏名(ユーザー名)
+          td
+            = "#{@order.user.firstname} #{@order.user.lastname}（#{@order.user.username}）"
+        tr
+          td
+            | メールアドレス
+          td
+            = @order.user.email
+        tr
+          td
+            | 郵便番号
+          td
+            = @order.user.zip
+        tr
+          td
+            | 国
+          td
+            = @order.user.country
+        tr
+          td
+            | 都道府県
+          td
+            = @order.user.state
+        tr
+          td
+            | 住所１
+          td
+            = @order.user.address
+        tr
+          td
+            | 住所２
+          td
+            = @order.user.address2
+
+    h2 注文商品情報
+    table.table
+      thead
+        tr
+          th[scope="col"]
+            | 商品名
+          th[scope="col"]
+            | 金額
+          th[scope="col"]
+            | 注文個数
+          th[scope="col"]
+            | 
+      tbody
         - @order.order_details.each do |order_detail|
-          .fs-5.mb-5
-            span
-              = "#{order_detail.name} #{order_detail.price}円"
-          p.lead
-            = order_detail.description
+          tr
+            td
+              = order_detail.name
+            td
+              = "#{order_detail.price}円"
+            td
+              = "#{order_detail.quantity}個"
+            td
+    div.text-end
+      = "総合計金額 #{@order_sum_price}円"
+    = link_to '一覧に戻る', orderdetails_path, class: 'btn btn-outline-dark mt-auto'
+

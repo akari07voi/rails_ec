@@ -1,18 +1,25 @@
+# frozen_string_literal: true
+
 class OrdersController < ApplicationController
   def create
     @order = Order.new
     @order.build_user
     @order.user = User.new(user_params)
-    @order.save!
     @order.user.save!
-    bought_items_details = @cart.cart_items
+    bought_items_counts =  @cart.cart_items.group(:item_id).count
+    bought_items_details = Item.where(id: bought_items_counts.keys)
     bought_items = bought_items_details.map do |bought_item_detail|
-      OrderDetail.new(order_id: @order.id, name: bought_item_detail.item.name, description: bought_item_detail.item.description,
-                      price: bought_item_detail.item.price)
+      @order.order_details.build(
+        order_id: @order.id,
+        name: bought_item_detail.name,
+        description: bought_item_detail.description,
+        price: bought_item_detail.price,
+        quantity: bought_items_counts[bought_item_detail.id]
+      )
     end
 
     OrderDetail.import bought_items
-    binding.pry
+    UserMailer.with(order: @order).order_detail_email(order: @order).deliver_now
     @cart.destroy
     flash[:notice] = '購入ありがとうございます。'
     redirect_to root_path
@@ -25,6 +32,7 @@ class OrdersController < ApplicationController
       :firstname,
       :lastname,
       :username,
+      :email,
       :country,
       :state,
       :address,

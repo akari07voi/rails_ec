@@ -1,7 +1,25 @@
-- @orders.each do |order|
-    .col.mb-5
-      .card.h-100
-        .card-body.p-4
-          h5.fw-bolder
-            = "注文者：#{order.user.firstname} さま" 
-            = link_to '詳細', orderdetail_path(order), method: :get, class: 'btn btn-outline-dark mt-auto'
+section.py-5
+  .container.px-2.px-lg-5
+    h1 購入明細一覧
+    table.table
+      thead
+        tr
+          th[scope="col"]
+            | 注文ID
+          th[scope="col"]
+            | 購入者氏名
+          th[scope="col"]
+            | 注文日付
+          th[scope="col"]
+            | 
+      tbody
+        - @orders.each do |order|
+          tr
+            td
+              = order.id
+            td
+              = "#{order.user.firstname} #{order.user.lastname}"
+            td
+              = order.user.created_at
+            td
+              = link_to '詳細', orderdetail_path(order), class: 'btn btn-outline-dark mt-auto'
