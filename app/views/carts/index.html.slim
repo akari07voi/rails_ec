@@ -104,8 +104,6 @@
                         |  Your username is required. 
                   .col-12
                     = user.label :email
-                      span.text-body-secondary
-                        | (Optional)
                     = user.text_field :email, class: 'form-control', placeholder: 'email@example.com', id: 'user_email'
                     .invalid-feedback
                       |  Please enter a valid email address for shipping updates. 
@@ -116,8 +114,8 @@
                       |  Please enter your shipping address. 
                   .col-12
                     = user.label :address2
-                      span.text-body-secondary
-                        | (Optional)
+                    span.text-body-secondary
+                      | (Optional)
                     = user.text_field :address2, class: 'form-control', placeholder: '1-1', id: 'user_address2'
                     = user.label :country
                     = user.text_field :country, class: 'form-control', placeholder: '日本', id: 'user_country'
