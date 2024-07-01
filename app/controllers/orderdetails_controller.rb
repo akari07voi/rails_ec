@@ -9,13 +9,8 @@ class OrderdetailsController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    @order_details = OrderDetail.where(order_id: params[:id])
-    @order_sum_price = 0
-    @order_sum_quantity = 0
-    @order_details.each do |order_detail|
-      @order_sum_price += (order_detail.quantity * order_detail.price)
-      @order_sum_quantity += order_detail.quantity
-    end
+    @order_sum_price = @order.sum_price
+    @order_sum_quantity = @order.sum_quantity
   end
 
   private
