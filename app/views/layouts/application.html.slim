@@ -58,8 +58,11 @@ html[lang="ja"]
               span.badge.bg-dark.text-white.ms-1.rounded-pill
                 = @cart_items.nil? ? 0 : @cart_items.count
     container.px-4.px-lg-5.mx-5
-      - if flash.notice.present? 
+      - if flash.notice.present?
         .alert.alert-success.mx-5 = flash.notice
+      - elsif flash.alert.present?
+        .alert.alert-danger.mx-5 = flash.alert
+
     = yield
     footer.py-5.bg-dark
       .container

@@ -17,11 +17,13 @@ class OrdersController < ApplicationController
         quantity: bought_items_counts[bought_item_detail.id]
       )
     end
-
     OrderDetail.import bought_items
     UserMailer.with(order: @order).order_detail_email(order: @order).deliver_now
     @cart.destroy
     flash[:notice] = '購入ありがとうございます。'
+  rescue StandardError => e
+    flash[:alert] = '購入に失敗しました。'
+  ensure
     redirect_to root_path
   end
 
