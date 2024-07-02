@@ -3,9 +3,7 @@
 class OrdersController < ApplicationController
   def create
     @order = Order.new
-    @order.build_user
-    @order.user = User.new(user_params)
-    @order.user.save!
+    @order.user.create(user_params)
     bought_items_counts =  @cart.cart_items.group(:item_id).count
     bought_items_details = Item.where(id: bought_items_counts.keys)
     bought_items = bought_items_details.map do |bought_item_detail|
@@ -20,11 +18,9 @@ class OrdersController < ApplicationController
     OrderDetail.import bought_items
     UserMailer.with(order: @order).order_detail_email(order: @order).deliver_now
     @cart.destroy
-    flash[:notice] = '購入ありがとうございます。'
-  rescue StandardError => e
-    flash[:alert] = '購入に失敗しました。'
-  ensure
-    redirect_to root_path
+    redirect_to root_path, flash: { notice: '購入ありがとうございます' }
+  rescue StandardError
+    redirect_to root_path, alert: '購入に失敗しました'
   end
 
   private
