@@ -9,6 +9,7 @@ class CartsController < ApplicationController
     @cart_items.each do |cart_item|
       @all_price += cart_item.item.price
     end
+    @order = Order.new
   end
 
   def new; end
