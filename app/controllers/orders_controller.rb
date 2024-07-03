@@ -3,7 +3,7 @@
 class OrdersController < ApplicationController
   def create
     @order = Order.new
-    @order.user.create(user_params)
+    @order.user.create!(user_params)
     bought_items_counts =  @cart.cart_items.group(:item_id).count
     bought_items_details = Item.where(id: bought_items_counts.keys)
     bought_items = bought_items_details.map do |bought_item_detail|
