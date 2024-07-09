@@ -1,2 +1,0 @@
-class PromotioncCode < ApplicationRecord
-end

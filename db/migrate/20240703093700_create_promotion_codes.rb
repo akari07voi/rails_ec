@@ -1,6 +1,6 @@
-class CreatePromotioncCodes < ActiveRecord::Migration[7.0]
+class CreatePromotionCodes < ActiveRecord::Migration[7.0]
   def change
-    create_table :promotionc_codes do |t|
+    create_table :promotion_codes do |t|
       t.string :code
       t.datetime :used_at
       t.integer :educed_price
