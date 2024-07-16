@@ -68,15 +68,15 @@
                   span.text-body-secondary
                     = "#{item.price}円 * #{@cart_detail[item.id]}個"
                   = button_to '削除', { controller: 'carts', action: 'destroy' }, { method: :delete, params: { item_id: item.id }, class: 'btn btn-danger mt-auto' }
-              - @cart.promotion_code.present?
-              li.list-group-item.d-flex.justify-content-between.bg-body-tertiary
-                div.text-success
-                  h6.my-0
-                    | プロモコード
-                  small
-                    = @cart.promotion_code.code
-                span.text-success
-                  = "-#{@cart.promotion_code.educed_price}円"
+              - if @cart.cart_items.size > 0 && !(@cart.promotion_code.nil?)
+                li.list-group-item.d-flex.justify-content-between.bg-body-tertiary
+                  div.text-success
+                    h6.my-0
+                      | プロモコード
+                    small
+                      = @cart.promotion_code.code
+                  span.text-success
+                    = "-#{@cart.promotion_code.educed_price}円"
               li.list-group-item.d-flex.justify-content-between
                 span
                   | 合計金額

@@ -9,8 +9,8 @@ class OrderdetailsController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    @order_sum_price = @order.sum_price
     @order_sum_quantity = @order.sum_quantity
+    @promotion_code = PromotionCode.find_by(order_id: @order.id)
   end
 
   private

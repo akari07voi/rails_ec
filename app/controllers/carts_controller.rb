@@ -6,7 +6,7 @@ class CartsController < ApplicationController
 
     @items = Item.where(id: @cart_detail.keys)
     @all_price = @cart.sum_price
-    @all_price -= @cart.promotion_code.educed_price if @cart.promotion_code.present?
+    @all_price -= @cart.promotion_code.educed_price if !@cart.promotion_code.nil? && @cart.cart_items.size.positive?
     @order = Order.new
   end
 
@@ -23,9 +23,13 @@ class CartsController < ApplicationController
   end
 
   def update
-    code_detail = PromotionCode.find_by(code: params[:code])
-    @cart.build_cart_promotion_code(promotion_code_id: code_detail.id)
-    @cart.cart_promotion_code.save
+    code_detail = PromotionCode.where(code: params[:code]).where(used_at: nil).first
+    if code_detail.present?
+      @cart.build_cart_promotion_code(promotion_code_id: code_detail.id)
+      @cart.cart_promotion_code.save
+    else
+      flash[:alert] = '入力されたコードはすでに使用済みか、正しくないコードです'
+    end
     redirect_to carts_path
   end
 

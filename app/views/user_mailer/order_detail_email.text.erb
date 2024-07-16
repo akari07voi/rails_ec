@@ -4,14 +4,15 @@
 購入内容を本メールに記載いたします。お間違いないかご確認ください。
 
 【注文内容】
-<% order_sum_price = 0%>
-<% order_sum_quantity = 0%>
 <% @order.order_details.each do |order_detail| %>
   ・<%= "#{order_detail.name} #{order_detail.price}円 × #{order_detail.quantity}個 合計 #{order_detail.price * order_detail.quantity}円" %>
-  <% order_sum_price += (order_detail.quantity * order_detail.price)%>
-  <% order_sum_quantity += order_detail.quantity%>
 <% end %>
-<%= "合計#{order_sum_quantity}点 #{order_sum_price}円" %>
+<% if @cart.promotion_code.present? %>
+  <%= "・プロモーションコード：#{@cart.promotion_code.code}"%>
+  <%= "（割引適用額：#{@cart.promotion_code.educed_price}円）"%>
+  <% order_sum_price = @order.sum_price - @cart.promotion_code.educed_price%>
+<% end %>
+<%= "合計#{@order.sum_quantity}点 #{order_sum_price}円" %>
 
 【購入者情報】
 <%= "#{@order.user.firstname} #{@order.user.lastname} 様 (ユーザー名：#{@order.user.username})" %>
