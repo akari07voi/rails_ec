@@ -6,7 +6,7 @@ class CartsController < ApplicationController
 
     @items = Item.where(id: @cart_detail.keys)
     @all_price = @cart.sum_price
-    @all_price -= @cart.promotion_code.educed_price if !@cart.promotion_code.nil? && @cart.cart_items.size.positive?
+    @all_price -= @cart.promotion_code.educed_price if @cart.promotion_code.present? && @cart.cart_items.size.positive?
     @order = Order.new
   end
 
