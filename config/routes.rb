@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   get '/carts', to: 'carts#index'
   post '/carts', to: 'carts#create'
+  put '/carts/:id', to: 'carts#update'
   delete '/carts', to: 'carts#destroy'
   resources :items
 

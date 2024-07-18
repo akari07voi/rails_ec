@@ -70,7 +70,17 @@ section.py-5
             td
               = "#{order_detail.quantity}個"
             td
+        - if @promotion_code.present?
+          tr
+            td.text-success
+              = "プロモーションコード (#{@promotion_code.code})"
+            td.text-success
+              = "-#{@promotion_code.educed_price}円"
+            td.text-success
+              | -
+            td
     div.text-end
-      = "総合計金額 #{@order_sum_price}円"
+      = "総合計金額 #{@promotion_code.present? ? @order.sum_price - @promotion_code.educed_price : @order.sum_price}円"
+
     = link_to '一覧に戻る', orderdetails_path, class: 'btn btn-outline-dark mt-auto'
 

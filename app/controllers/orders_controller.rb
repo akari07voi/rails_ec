@@ -3,22 +3,14 @@
 class OrdersController < ApplicationController
   def create
     @order = Order.new
-    @order.user.create!(user_params)
-    bought_items_counts =  @cart.cart_items.group(:item_id).count
-    bought_items_details = Item.where(id: bought_items_counts.keys)
-    bought_items = bought_items_details.map do |bought_item_detail|
-      @order.order_details.build(
-        order_id: @order.id,
-        name: bought_item_detail.name,
-        description: bought_item_detail.description,
-        price: bought_item_detail.price,
-        quantity: bought_items_counts[bought_item_detail.id]
-      )
-    end
+    @order.user = User.new(user_params)
+    @order.save
+    bought_items = @order.bought_items(@cart)
     OrderDetail.import bought_items
-    UserMailer.with(order: @order).order_detail_email(order: @order).deliver_now
+    UserMailer.with(order: @order).order_detail_email(@order, @cart).deliver_now
+    @cart.promotion_code.update(used_at: Time.zone.now, order_id: @order.id) if @cart.promotion_code.present?
     @cart.destroy
-    redirect_to root_path, flash: { notice: '購入ありがとうございます' }
+    redirect_to root_path, notice: '購入ありがとうございます'
   rescue StandardError
     redirect_to root_path, alert: '購入に失敗しました'
   end

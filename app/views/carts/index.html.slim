@@ -68,16 +68,24 @@
                   span.text-body-secondary
                     = "#{item.price}円 * #{@cart_detail[item.id]}個"
                   = button_to '削除', { controller: 'carts', action: 'destroy' }, { method: :delete, params: { item_id: item.id }, class: 'btn btn-danger mt-auto' }
+              - if @cart.cart_items.size > 0 && !(@cart.promotion_code.nil?)
+                li.list-group-item.d-flex.justify-content-between.bg-body-tertiary
+                  div.text-success
+                    h6.my-0
+                      | プロモコード
+                    small
+                      = @cart.promotion_code.code
+                  span.text-success
+                    = "-#{@cart.promotion_code.educed_price}円"
               li.list-group-item.d-flex.justify-content-between
                 span
                   | 合計金額
                 strong
                   = "#{@all_price}円"
-            form.card.p-2
+            = form_with url: { controller: 'carts', action: 'update', id: @cart.id }, method: :put, class: 'card p-2', local: true do |f|
               .input-group
-                input.form-control[type="text" placeholder="Promo code"]
-                button.btn.btn-secondary[type="submit"]
-                  | Redeem
+                = f.text_field :code, class: 'form-control', placeholder: "sample1"
+                = f.submit 'コード適用', class: 'btn btn-secondary'
           .col-md-7.col-lg-8
             h4.mb-3
               | 購入者情報
