@@ -57,7 +57,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_09_115328) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["cart_id"], name: "index_cart_promotion_codes_on_cart_id"
-    t.index ["promotion_code_id"], name: "index_cart_promotion_codes_on_promotion_code_id"
+    t.index ["promotion_code_id"], name: "index_cart_promotion_codes_on_promotion_code_id", unique: true
   end
 
   create_table "carts", force: :cascade do |t|
