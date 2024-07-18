@@ -24,11 +24,17 @@ class CartsController < ApplicationController
 
   def update
     code_detail = PromotionCode.find_by(code: params[:code], used_at: nil)
-    if code_detail.present?
-      @cart.build_cart_promotion_code(promotion_code_id: code_detail.id)
-      @cart.cart_promotion_code.save
-    else
+
+    if code_detail.nil?
       flash[:alert] = '入力されたコードはすでに使用済みか、正しくないコードです'
+    else
+      cart_used_code = CartPromotionCode.find_by(promotion_code_id: code_detail.id)
+      if cart_used_code.present?
+        flash[:alert] = '入力されたコードはすでに使用済みです'
+      else
+        @cart.build_cart_promotion_code(promotion_code_id: code_detail.id)
+        @cart.cart_promotion_code.save
+      end
     end
     redirect_to carts_path
   end
