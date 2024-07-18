@@ -23,7 +23,7 @@ class CartsController < ApplicationController
   end
 
   def update
-    code_detail = PromotionCode.where(code: params[:code]).where(used_at: nil).first
+    code_detail = PromotionCode.find_by(code: params[:code], used_at: nil)
     if code_detail.present?
       @cart.build_cart_promotion_code(promotion_code_id: code_detail.id)
       @cart.cart_promotion_code.save
